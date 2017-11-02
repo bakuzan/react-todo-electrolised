@@ -1,6 +1,7 @@
 import { createStore, applyMiddleware } from 'redux'
-
+import { routerMiddleware } from 'react-router-redux';
 import {createLogger} from 'redux-logger'
+
 import rootReducer from 'reducers'
 
 
@@ -16,11 +17,13 @@ const logger = createLogger({
 })
 
 
-const configureStore = preloadedState => {
+const configureStore = (history, preloadedState) => {
+  const middlewares = [routerMiddleware(history), logger]
+
   const store = createStore(
     rootReducer,
     preloadedState,
-    applyMiddleware(logger)
+    applyMiddleware(...middlewares)
   )
 
   if (module.hot) {
