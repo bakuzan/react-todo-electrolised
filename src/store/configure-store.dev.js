@@ -11,7 +11,8 @@ const logger = createLogger({
     action: () => "magenta",
     nextState: () => "green",
     error: () => "red"
-  }
+  },
+  collapsed: (getState, action) => action.type === "SET_THEME_CLASS"
 })
 
 
