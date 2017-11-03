@@ -47,7 +47,7 @@ class Home extends Component {
     const { todos } = this.props;
 
     return (
-      <div className="flex-column centered">
+      <div id="todos">
         <div id="controls">
           <form onSubmit={this.handleSubmit}>
             <ClearableInput
@@ -67,9 +67,11 @@ class Home extends Component {
                 checked={item.isComplete}
                 onChange={() => this.handleCompleteState(item.id)}
               />
+              <div className="flex-spacer"></div>
               <button
                 type="button"
-                className="button-icon"
+                className="button-icon small"
+                title="Remove todo"
                 icon={Icons.cross}
                 onClick={() => this.handleRemove(item.id)}>
               </button>
