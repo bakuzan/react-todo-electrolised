@@ -7,6 +7,7 @@ import configureStore from 'store/configure-store'
 
 import registerServiceWorker from './registerServiceWorker';
 import './index.css';
+import 'styles/button.css'
 
 
 const history = createHistory();

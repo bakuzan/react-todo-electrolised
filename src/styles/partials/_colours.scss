@@ -1,0 +1,52 @@
+$darken-amount: 5%;
+
+// Colours
+$erza-red: #850512;
+$erza-red-highlight: #CE414A;
+$erza-blue: #082A6A;
+$erza-silver: #E1E3EF;
+$erza-silver-shade: #7E7E86;
+
+$white: #fff;
+$grey95: #f2f2f2;
+$grey94: #efefef;
+$grey80: #ccc;
+$grey40: #666;
+$onyx: #0f0f0f;
+$black-blue: #1c1f2b;
+$black-red: #420309;
+$black-smokey: #100c08;
+$black: #000;
+
+$red: #ff0000;
+$green: #00ff00;
+$blue: #0000ff;
+$yellow: #ffff00;
+$magenta: #ff00ff;
+$cyan: #00ffff;
+
+$orange: #ff9900;
+$dark-violet: #674ea7;
+$very-dark-blue: #073763;
+$soft-blue: #6fa8dc;
+$dark-red: #a61c00;
+$desaturated-green: #93c47d; //$moderate-green: #99cc66;
+$brown-from-dark-yellow: #7f6000;
+
+$gold: #ffcc00;
+$silver: #cccccc;
+$bronze: #cc6633;
+
+// Usages
+
+$primary-background: $erza-red;
+$primary-colour: $erza-red;
+$primary-colour-contrast: $erza-silver;
+
+$secondary-background: $erza-red-highlight;
+$secondary-colour: $erza-red-highlight;
+$secondary-colour-contrast: $erza-silver-shade;
+
+
+$anchor-colour: $secondary-colour;
+$anchor-colour-hover: $secondary-colour-contrast;

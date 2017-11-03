@@ -3,7 +3,9 @@ import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 
 import * as actions from 'actions/todos'
+import Icons from 'constants/icons'
 import ClearableInput from 'components/clearable-input/clearable-input'
+import Tickbox from 'components/tickbox/tickbox'
 
 import './home.css';
 
@@ -18,6 +20,7 @@ class Home extends Component {
     this.handleUserInput = this.handleUserInput.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleCompleteState = this.handleCompleteState.bind(this)
+    this.handleRemove = this.handleRemove.bind(this)
   }
 
   handleUserInput(event) {
@@ -34,6 +37,10 @@ class Home extends Component {
 
   handleCompleteState(todoId) {
     this.props.toggleCompleteTodo(todoId);
+  }
+
+  handleRemove(todoId) {
+    this.props.removeTodo(todoId);
   }
 
   render() {
@@ -54,10 +61,18 @@ class Home extends Component {
         {
           todos.map(item => (
             <li key={item.id}>
-              <label>
-                <input type="checkbox" onChange={() => this.handleCompleteState(item.id)} />
-              { item.description }
-              </label>
+              <Tickbox
+                text={item.description}
+                name="isComplete"
+                checked={item.isComplete}
+                onChange={() => this.handleCompleteState(item.id)}
+              />
+              <button
+                type="button"
+                className="button-icon"
+                icon={Icons.cross}
+                onClick={() => this.handleRemove(item.id)}>
+              </button>
             </li>
           ))
         }

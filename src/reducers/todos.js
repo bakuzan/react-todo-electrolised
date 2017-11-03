@@ -1,4 +1,4 @@
-import {ADD_TODO, TOGGLE_COMPLETE_TODO} from 'actions/todos'
+import {ADD_TODO, TOGGLE_COMPLETE_TODO, REMOVE_TODO} from 'actions/todos'
 import {getUserSettings, persistUserSettings} from 'utils/common'
 import {createReducer} from './utils'
 
@@ -32,6 +32,11 @@ const persistCompletionStatus = (state, action) => {
   return persistAndReturn(state, list)
 }
 
+const persistUpdatedList = (state, action) => {
+  const list = state.list.filter(x => x.id !== action.id)
+  return persistAndReturn(state, list)
+}
+
 const persistAndReturn = (state, list) => {
   const updatedSettings = persistUserSettings({
     todos: { ...state, list }
@@ -41,7 +46,8 @@ const persistAndReturn = (state, list) => {
 
 const todos = createReducer(getLocalState(), {
   [ADD_TODO]      : persistNewTodo,
-  [TOGGLE_COMPLETE_TODO] : persistCompletionStatus
+  [TOGGLE_COMPLETE_TODO] : persistCompletionStatus,
+  [REMOVE_TODO] : persistUpdatedList
 })
 
 export default todos
