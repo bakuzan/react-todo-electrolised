@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 
 import {setApplicationTheme} from 'actions/theme'
 import reactLogo from 'assets/logo.svg';
@@ -29,6 +30,9 @@ class Home extends Component {
             DARK
           </button>
         </div>
+        <Link to="/test">
+        Test
+        </Link>
       </div>
     );
   }

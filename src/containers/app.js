@@ -1,13 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Route} from 'react-router-dom';
-
-import Home from 'views/home/home'
 
 
-const App = ({ theme }) => (
+const App = ({ theme, children }) => (
   <main className={theme}>
-    <Route exact path="/" component={Home} />
+  { children }
   </main>
 )
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import createHistory from 'history/createBrowserHistory';
+import createHistory from 'history/createMemoryHistory';
 
 import Root from 'containers/root'
 import configureStore from 'store/configure-store'
