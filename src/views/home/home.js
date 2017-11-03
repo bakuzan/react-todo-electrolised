@@ -1,49 +1,78 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
+import {bindActionCreators} from 'redux'
 
-import {setApplicationTheme} from 'actions/theme'
-import reactLogo from 'assets/logo.svg';
-import electronLogo from 'assets/electron.svg'
+import * as actions from 'actions/todos'
+import ClearableInput from 'components/clearable-input/clearable-input'
+
 import './home.css';
 
 class Home extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      text: ""
+    }
+
+    this.handleUserInput = this.handleUserInput.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleCompleteState = this.handleCompleteState.bind(this)
+  }
+
+  handleUserInput(event) {
+    this.setState({ text: event.target.value })
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    if (!this.state.text) return;
+
+    this.props.addTodo(this.state.text)
+    this.setState({ text: "" })
+  }
+
+  handleCompleteState(todoId) {
+    this.props.toggleCompleteTodo(todoId);
+  }
+
   render() {
-    const { theme, setApplicationTheme } = this.props;
+    const { todos } = this.props;
 
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={reactLogo} className="App-logo" alt="react logo" />
-          <img src={electronLogo} className="App-logo" alt="electron logo" />
-          <h1 className="App-title">Welcome to React Electron</h1>
-        </header>
-        <p className="App-intro">
-          Starting point for development
-        </p>
-        <div>
-          <p>Pick theme</p>
-          <button disabled={theme === "light"} onClick={() => setApplicationTheme("light")}>
-            LIGHT
-          </button>
-          <button disabled={theme === "dark"} onClick={() => setApplicationTheme("dark")}>
-            DARK
-          </button>
+      <div className="flex-column centered">
+        <div id="controls">
+          <form onSubmit={this.handleSubmit}>
+            <ClearableInput
+              label="What do you want to do?"
+              value={this.state.text}
+              onChange={this.handleUserInput}
+            />
+          </form>
         </div>
-        <Link to="/test">
-        Test
-        </Link>
+        <ul id="todo-list">
+        {
+          todos.map(item => (
+            <li key={item.id}>
+              <label>
+                <input type="checkbox" onChange={() => this.handleCompleteState(item.id)} />
+              { item.description }
+              </label>
+            </li>
+          ))
+        }
+        </ul>
       </div>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  theme: state.theme.class
+  todos: state.todos.list
 })
 
-const mapDispatchToProps = ({
-  setApplicationTheme
+const mapDispatchToProps = dispatch => ({
+  ...bindActionCreators(actions, dispatch)
 })
 
 export default connect(

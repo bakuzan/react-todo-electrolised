@@ -7,3 +7,9 @@ export const persistUserSettings = (settingUpdate) => {
   localStorage.setItem(Strings.localUserSettings, JSON.stringify(updated));
   return updated;
 }
+
+const timers = {};
+export const debounce = (f, t) => {
+  clearTimeout(timers[f]);
+  timers[f] = setTimeout(() => f(), t);
+}
